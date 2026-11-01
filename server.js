@@ -48,8 +48,11 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => req.session.destroy(() => res.redirect('/login')));
 
-// --- Tableau de bord : documents ---
-app.get('/', requireLogin, (req, res) => {
+// --- Accueil : redirige selon l'état de connexion ---
+app.get('/', (req, res) => res.redirect(req.session.user ? '/documents' : '/login'));
+
+// --- Tableau de bord : documents (protégé) ---
+app.get('/documents', requireLogin, (req, res) => {
   res.render('dashboard', { documents: db.load('documents') });
 });
 
@@ -67,7 +70,7 @@ app.post('/upload', requireLogin, upload.single('file'), (req, res) => {
     uploadedBy: req.session.user.username,
   });
   db.save('documents', docs);
-  res.redirect('/');
+  res.redirect('/documents');
 });
 
 // --- Téléchargement d'un document (admin uniquement) ---

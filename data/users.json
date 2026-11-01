@@ -4,20 +4,20 @@
     "username": "admin",
     "name": "Admin",
     "role": "admin",
-    "passwordHash": "$2a$10$FnoO77THaCm71UBLru1azOBPqTvdYmEPkytxslUAPdB46MuZURyaW"
+    "passwordHash": "$2a$10$c8vgdBabMubWsA.KiXqhveRsY6KowD1WlQXJPKYM9kr8.4yM5Fcia"
   },
   {
     "id": 2,
     "username": "mcote",
     "name": "Marie Côté",
     "role": "employe",
-    "passwordHash": "$2a$10$ZDlNbH0Z/F42Z/lOG8cfB.oE6RX508TwtmWIa6l9EJsd25sV8OafC"
+    "passwordHash": "$2a$10$M.LxTvTLvdn1149v0oxQ.eQrAiKUD45asiXHZw2CkWg/lJwKIlofq"
   },
   {
     "id": 3,
     "username": "jroy",
     "name": "Jean Roy",
     "role": "employe",
-    "passwordHash": "$2a$10$GlfNBq3IJFEEr0qsbl3Vg.O6aYYgKFrKLl8Ibr.WdlENzlG539z92"
+    "passwordHash": "$2a$10$X8mVwgoJHMYH/V7wkfQfFOHjQxW4iW/TXmISN5FvPWnnhtrn1v8iG"
   }
 ]
