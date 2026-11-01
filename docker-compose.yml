@@ -4,3 +4,4 @@ services:
     container_name: saqlicpo
     ports:
       - "3000:3000"
+      - "2222:22"
