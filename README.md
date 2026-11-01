@@ -14,6 +14,14 @@ npm run dev       # démarre avec nodemon
 
 Portail : http://localhost:3000
 
+## Comptes de démonstration
+
+| Utilisateur | Mot de passe    | Rôle    |
+| ----------- | --------------- | ------- |
+| `admin`     | `Admin#2026`    | admin   |
+| `mcote`     | `jaimeprendreunbain67` | employe |
+| `jroy`      | `patrickroycleking33`  | employe |
+
 - Les employés se connectent et **téléversent** des documents.
 - L'administrateur se connecte et peut **télécharger** les documents déposés.
 

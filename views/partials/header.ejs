@@ -11,7 +11,8 @@
     <a class="brand" href="/">SAQLICPO</a>
     <% if (user) { %>
       <nav>
-        <a href="/">Documents</a>
+        <a href="/">Accueil</a>
+        <a href="/documents">Documents</a>
         <span class="who"><%= user.name %> · <%= user.role %></span>
         <form method="post" action="/logout"><button>Déconnexion</button></form>
       </nav>

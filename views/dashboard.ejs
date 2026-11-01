@@ -2,7 +2,7 @@
   <h1>Documents</h1>
   <form method="post" action="/upload" enctype="multipart/form-data" class="card row">
     <label>Clinique<input name="clinic" placeholder="Clinique Saint-Jean…"></label>
-    <label>Fichier<input type="file" name="file" required></label>
+    <label>Facture (.png)<input type="file" name="file" accept="image/png" required></label>
     <button type="submit">Téléverser</button>
   </form>
   <table>

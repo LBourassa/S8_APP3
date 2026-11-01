@@ -3,3 +3,7 @@ uploads/*
 !uploads/.gitkeep
 .env
 npm-debug.log*
+
+# logs applicatifs (générés à l'exécution)
+logs/*.log
+!logs/.gitkeep
