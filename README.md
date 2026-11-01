@@ -4,12 +4,20 @@ Portail interne fictif : les employés téléversent des
 documents, l'administrateur peut les télécharger. Application de base,
 fonctionnelle.
 
-## Démarrer
+## Démarrer (dev web)
 
 ```bash
 npm install
 npm run seed      # crée data/users.json (mots de passe hachés)
 npm run dev       # démarre avec nodemon
+```
+
+Portail : http://localhost:3000
+
+## Démarrer (conteneur)
+
+```bash
+docker compose up --build
 ```
 
 Portail : http://localhost:3000

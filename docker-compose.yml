@@ -1,0 +1,6 @@
+services:
+  saqlicpo:
+    build: .
+    container_name: saqlicpo
+    ports:
+      - "3000:3000"
