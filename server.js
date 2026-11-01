@@ -48,8 +48,8 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => req.session.destroy(() => res.redirect('/login')));
 
-// --- Accueil : redirige selon l'état de connexion ---
-app.get('/', (req, res) => res.redirect(req.session.user ? '/documents' : '/login'));
+// --- Accueil : page de bienvenue (protégée) ---
+app.get('/', requireLogin, (req, res) => res.render('home'));
 
 // --- Tableau de bord : documents (protégé) ---
 app.get('/documents', requireLogin, (req, res) => {
