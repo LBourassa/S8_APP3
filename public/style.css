@@ -1,0 +1,19 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: #1d1d22; background: #f6f6f8; }
+.nav { display: flex; align-items: center; gap: 16px; padding: 12px 20px; background: #1d1d22; color: #fff; }
+.nav .brand { font-weight: 800; color: #ff7a00; text-decoration: none; font-size: 18px; }
+.nav nav { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.nav a { color: #eee; text-decoration: none; }
+.nav .who { color: #aaa; font-size: 14px; }
+.nav button { background: #e01e1e; border: 0; color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+main { max-width: 860px; margin: 24px auto; padding: 0 20px; }
+h1 { font-size: 22px; }
+.card { background: #fff; border: 1px solid #e3e3e8; border-radius: 10px; padding: 16px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.card.row { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+input { padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+button[type=submit] { background: #ff7a00; border: 0; color: #111; font-weight: 700; padding: 9px 16px; border-radius: 6px; cursor: pointer; }
+.error { color: #e01e1e; font-weight: 600; }
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e3e3e8; border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+th { background: #faf7f2; }

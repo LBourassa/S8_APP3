@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SAQLICPO</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/">SAQLICPO</a>
+    <% if (user) { %>
+      <nav>
+        <a href="/">Documents</a>
+        <span class="who"><%= user.name %> · <%= user.role %></span>
+        <form method="post" action="/logout"><button>Déconnexion</button></form>
+      </nav>
+    <% } %>
+  </header>
+  <main>

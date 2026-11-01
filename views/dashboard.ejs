@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+  <h1>Documents</h1>
+  <form method="post" action="/upload" enctype="multipart/form-data" class="card row">
+    <label>Clinique<input name="clinic" placeholder="Clinique Saint-Jean…"></label>
+    <label>Fichier<input type="file" name="file" required></label>
+    <button type="submit">Téléverser</button>
+  </form>
+  <table>
+    <thead><tr><th>#</th><th>Nom</th><th>Clinique</th><th>Déposé par</th><th></th></tr></thead>
+    <tbody>
+      <% documents.forEach(d => { %>
+        <tr>
+          <td><%= d.id %></td>
+          <td><%= d.name %></td>
+          <td><%= d.clinic %></td>
+          <td><%= d.uploadedBy %></td>
+          <td><% if (user.role === 'admin') { %><a href="/download/<%= d.id %>">Télécharger</a><% } %></td>
+        </tr>
+      <% }) %>
+      <% if (documents.length === 0) { %><tr><td colspan="5">Aucun document.</td></tr><% } %>
+    </tbody>
+  </table>
+<%- include('partials/footer') %>

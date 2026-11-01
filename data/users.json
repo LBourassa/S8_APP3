@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "name": "Admin",
+    "role": "admin",
+    "passwordHash": "$2a$10$FnoO77THaCm71UBLru1azOBPqTvdYmEPkytxslUAPdB46MuZURyaW"
+  },
+  {
+    "id": 2,
+    "username": "mcote",
+    "name": "Marie Côté",
+    "role": "employe",
+    "passwordHash": "$2a$10$ZDlNbH0Z/F42Z/lOG8cfB.oE6RX508TwtmWIa6l9EJsd25sV8OafC"
+  },
+  {
+    "id": 3,
+    "username": "jroy",
+    "name": "Jean Roy",
+    "role": "employe",
+    "passwordHash": "$2a$10$GlfNBq3IJFEEr0qsbl3Vg.O6aYYgKFrKLl8Ibr.WdlENzlG539z92"
+  }
+]

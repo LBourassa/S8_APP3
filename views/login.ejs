@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+  <h1>Connexion</h1>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form method="post" action="/login" class="card">
+    <label>Utilisateur<input name="username" autofocus required></label>
+    <label>Mot de passe<input name="password" type="password" required></label>
+    <button type="submit">Se connecter</button>
+  </form>
+<%- include('partials/footer') %>
