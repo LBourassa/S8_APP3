@@ -1,7 +1,11 @@
-// Génère data/users.json avec des mots de passe hachés (bcrypt). Lancer : npm run seed
+// Génère data/users.json. Lancer : npm run seed
+//
+// ⚠️  VULN #5 (volet 2/2) — les mots de passe sont CHIFFRÉS (réversibles),
+// pas hachés. Combinés à la clé qui fuite dans logs/app.log, ils sont
+// entièrement récupérables en clair.
 const fs = require('fs');
 const path = require('path');
-const bcrypt = require('bcryptjs');
+const { chiffrer } = require('./crypto');
 
 const seed = [
   { id: 1, username: 'admin', name: 'Admin', role: 'admin',   password: 'Admin#2026' },
@@ -11,8 +15,8 @@ const seed = [
 
 const users = seed.map(u => ({
   id: u.id, username: u.username, name: u.name, role: u.role,
-  passwordHash: bcrypt.hashSync(u.password, 10),
+  passwordEnc: chiffrer(u.password),
 }));
 
 fs.writeFileSync(path.join(__dirname, 'data', 'users.json'), JSON.stringify(users, null, 2));
-console.log(`Seed : data/users.json créé (${users.length} utilisateurs).`);
+console.log(`Seed : data/users.json créé (${users.length} utilisateurs, mots de passe chiffrés).`);
