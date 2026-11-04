@@ -3,7 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
-const bcrypt = require('bcryptjs');
+const { dechiffrer, SECRET } = require('./crypto');
 const db = require('./db');
 
 const app = express();
@@ -48,7 +48,11 @@ app.get('/login', (req, res) => res.render('login', { error: null }));
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const user = db.load('users').find(u => u.username === username);
-  if (!user || !bcrypt.compareSync(password || '', user.passwordHash)) {
+  // ⚠️ VULN #5 — on DÉCHIFFRE le mot de passe stocké pour le comparer (au lieu
+  // de comparer un hash). Tout détenteur de la clé peut donc retrouver le clair.
+  let clair = null;
+  try { if (user) clair = dechiffrer(user.passwordEnc); } catch { clair = null; }
+  if (!user || clair !== (password || '')) {
     log('LOGIN_FAIL', `user=${username} ip=${req.ip}`);
     return res.status(401).render('login', { error: 'Identifiants invalides.' });
   }
@@ -129,10 +133,47 @@ app.get('/download/:id', requireLogin, requireAdmin, (req, res) => {
   });
 });
 
+// --- OBJECTIF : fiche de paie, réservée à l'administrateur ---
+// Contre-exemple « sécurisé » : on ne garde QUE le nom de base (path.basename)
+// et on confine à PAIE_DIR, donc cette route N'est PAS traversable. La seule
+// voie « propre » vers la paie est donc la prise du compte admin (chaîne #4→#5).
+const PAIE_DIR = path.join(__dirname, 'data', 'paie');
+app.get('/paie', requireLogin, requireAdmin, (req, res) => {
+  const nom = path.basename(req.query.nom || 'fiche_paie_2026-11.csv'); // confiné
+  const chemin = path.join(PAIE_DIR, nom);
+  if (!chemin.startsWith(PAIE_DIR + path.sep)) return res.status(400).send('Chemin invalide');
+  log('PAIE', `user=${req.session.user.username} nom="${nom}" ip=${req.ip}`);
+  res.download(chemin, nom, (err) => {
+    if (err && !res.headersSent) res.status(404).send('Fiche introuvable');
+  });
+});
+
+// --- Téléchargement d'un document par son nom de fichier (tout employé) ---
+// ⚠️ VULN #4 — PATH TRAVERSAL. Le nom vient de l'utilisateur (?nom=) et est
+// concaténé au répertoire uploads/ SANS vérifier que le résultat y reste.
+// path.join() résout les « ../ » et produit un chemin absolu normalisé :
+// res.sendFile() ne voit alors plus aucun « .. » et sert le fichier hors de
+// uploads/. Exemples :
+//   /fichier?nom=../logs/app.log        → journaux (contiennent la clé, vuln #5)
+//   /fichier?nom=../data/users.json     → mots de passe chiffrés
+//   /fichier?nom=../../../../etc/passwd → fichiers système du conteneur
+app.get('/fichier', requireLogin, (req, res) => {
+  const nom = req.query.nom || '';
+  const chemin = path.join(UPLOAD_DIR, nom); // aucun confinement
+  log('FICHIER', `user=${req.session.user.username} nom="${nom}" ip=${req.ip}`);
+  res.sendFile(chemin, (err) => {
+    if (err && !res.headersSent) res.status(404).send('Fichier introuvable');
+  });
+});
+
 // 404 pour toute autre route.
 app.use((req, res) => res.status(404).send('Page introuvable'));
 
 app.listen(PORT, () => {
   log('START', `port=${PORT}`);
+  // ⚠️ VULN #5 — la clé de chiffrement est écrite en clair dans logs/app.log.
+  // Un attaquant qui lit ce journal (p. ex. via la vuln #4) récupère la clé,
+  // puis déchiffre tous les mots de passe de data/users.json.
+  log('CRYPTO_INIT', `chargement cle de chiffrement APP_KEY=${SECRET}`);
   console.log(`SAQLICPO sur http://localhost:${PORT}`);
 });
