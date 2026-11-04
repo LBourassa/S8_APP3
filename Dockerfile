@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install --omit=dev
 
 COPY . .
-
+RUN node seed.js   
 # Vulnérabilité SSH #2 : serveur SSH avec login root et mot de passe faible codé en dur.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends openssh-server \
