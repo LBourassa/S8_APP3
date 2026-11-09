@@ -1,23 +1,25 @@
 <%- include('partials/header') %>
-  <h1>Documents</h1>
-  <form method="post" action="/upload" enctype="multipart/form-data" class="card row">
-    <label>Clinique<input name="clinic" placeholder="Clinique Saint-Jean…"></label>
-    <label>Facture (.png)<input type="file" name="file" accept="image/png" required></label>
-    <button type="submit">Téléverser</button>
+  <div class="section-title"><h2>Documents</h2></div>
+  <form class="panel toolbar" method="post" action="/upload" enctype="multipart/form-data">
+    <label class="field">Clinique<input name="clinic" placeholder="Clinique Saint-Jean…"></label>
+    <label class="field">Facture (.png)<input type="file" name="file" accept="image/png" required></label>
+    <button type="submit" class="btn btn--primary">Téléverser</button>
   </form>
-  <table>
-    <thead><tr><th>#</th><th>Nom</th><th>Clinique</th><th>Déposé par</th><th></th></tr></thead>
-    <tbody>
-      <% documents.forEach(d => { %>
-        <tr>
-          <td><%= d.id %></td>
-          <td><%= d.name %></td>
-          <td><%= d.clinic %></td>
-          <td><%= d.uploadedBy %></td>
-          <td><% if (user.role === 'admin') { %><a href="/download/<%= d.id %>">Télécharger</a><% } %></td>
-        </tr>
-      <% }) %>
-      <% if (documents.length === 0) { %><tr><td colspan="5">Aucun document.</td></tr><% } %>
-    </tbody>
-  </table>
+  <div class="panel" style="margin-top:18px;overflow:hidden">
+    <table>
+      <thead><tr><th>#</th><th>Nom</th><th>Clinique</th><th>Déposé par</th><th></th></tr></thead>
+      <tbody>
+        <% documents.forEach(function (d) { %>
+          <tr>
+            <td><%= d.id %></td>
+            <td><%= d.name %></td>
+            <td><%= d.clinic %></td>
+            <td><%= d.uploadedBy %></td>
+            <td><% if (user.role === 'admin') { %><a class="linklike" href="/download/<%= d.id %>">Télécharger</a><% } %></td>
+          </tr>
+        <% }) %>
+        <% if (documents.length === 0) { %><tr><td class="empty" colspan="5">Aucun document.</td></tr><% } %>
+      </tbody>
+    </table>
+  </div>
 <%- include('partials/footer') %>

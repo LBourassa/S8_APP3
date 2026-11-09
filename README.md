@@ -1,20 +1,12 @@
 # SAQLICPO — APP3 (S8)
 
-Portail interne fictif : les employés téléversent des
-documents, l'administrateur peut les télécharger. Application de base,
-fonctionnelle.
+Portail interne fictif : les employés téléversent des documents,
+l'administrateur peut les télécharger.
 
-## Démarrer (dev web)
+## Démarrer
 
-```bash
-npm install
-npm run seed      # crée data/users.json (mots de passe hachés)
-npm run dev       # démarre avec nodemon
-```
-
-Portail : http://localhost:3000
-
-## Démarrer (conteneur)
+L'application se lance **dans un conteneur Docker**. Prérequis : **Docker Desktop**
+installé et démarré.
 
 ```bash
 docker compose up --build
@@ -22,11 +14,13 @@ docker compose up --build
 
 Portail : http://localhost:3000
 
+Pour l'arrêter : `Ctrl+C`, puis `docker compose down`.
+
 ## Comptes de démonstration
 
-| Utilisateur | Mot de passe    | Rôle    |
-| ----------- | --------------- | ------- |
-| `admin`     | `Admin#2026`    | admin   |
+| Utilisateur | Mot de passe           | Rôle    |
+| ----------- | ---------------------- | ------- |
+| `admin`     | `Admin#2026`           | admin   |
 | `mcote`     | `jaimeprendreunbain67` | employe |
 | `jroy`      | `patrickroycleking33`  | employe |
 

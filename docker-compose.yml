@@ -5,3 +5,5 @@ services:
     ports:
       - "3000:3000"
       - "2222:22"
+    environment:
+      - APP_KEY=saqlicpo-cle-interne-2026
