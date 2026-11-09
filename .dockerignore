@@ -9,3 +9,7 @@ Dockerfile
 docker-compose.yml
 .dockerignore
 README.md
+
+# clés SSH de test : ne pas embarquer dans l'image (l'utilisateur crée la sienne)
+pirate
+pirate.pub

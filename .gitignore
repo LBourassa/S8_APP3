@@ -11,3 +11,7 @@ logs/*.log
 # cles SSH de test (ne pas committer)
 pirate
 pirate.pub
+
+# image exportée pour distribution (volumineuse)
+dist/*.tar
+dist/*.tar.gz

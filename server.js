@@ -98,7 +98,7 @@ app.post('/upload', requireLogin, (req, res) => {
     } catch (e) { /* aperçu indisponible */ }
     const docs = db.load('documents');
     const id = docs.reduce((m, d) => Math.max(m, d.id), 0) + 1;
-    docs.push({ id, name: req.file.originalname, stored: req.file.filename, clinic: req.body.clinic || '—', uploadedBy: req.session.user.username });
+    docs.push({ id, name: req.file.originalname, stored: req.file.filename, description: req.body.description || '—', uploadedBy: req.session.user.username });
     db.save('documents', docs);
     res.redirect('/documents');
   });
@@ -119,7 +119,7 @@ app.get('/download/:id', requireLogin, requireAdmin, (req, res) => {
 // startsWith). La traversée interne (#4) est confinée à /app : elle ne peut donc
 // PAS atteindre la paie. Seule voie vers la paie : le compte admin (fin de chaîne).
 app.get('/paie', requireLogin, requireAdmin, (req, res) => {
-  const nom = path.basename(req.query.nom || 'fiche_paie_2026-11.csv');
+  const nom = path.basename(req.query.nom || 'fiche_paie_2026-11.xlsx');
   const chemin = path.join(PAIE_DIR, nom);
   if (!chemin.startsWith(PAIE_DIR + path.sep)) return res.status(400).send('Chemin invalide');
   log('PAIE', `user=${req.session.user.username} nom="${nom}" ip=${req.ip}`);

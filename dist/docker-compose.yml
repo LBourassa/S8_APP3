@@ -1,0 +1,8 @@
+# Compose destiné aux étudiants : AUCUN code source, on utilise l'image fournie.
+services:
+  saqlicpo:
+    image: saqlicpo:app3
+    container_name: saqlicpo
+    ports:
+      - "3000:3000"
+      - "2222:22"

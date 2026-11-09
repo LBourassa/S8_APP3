@@ -4,20 +4,20 @@
     "username": "admin",
     "name": "Admin",
     "role": "admin",
-    "passwordHash": "$2a$10$3PnHo4YYXwaaoMSZ.aW6TuvA/ACztmjghCh4vkuqPupkDXewMVaGS"
+    "passwordEnc": "ccd115eabbea82ef629e3959a43d4cc2:1a08243e9c54cc5fa7657cf6d0e13678"
   },
   {
     "id": 2,
     "username": "mcote",
     "name": "Marie Côté",
     "role": "employe",
-    "passwordHash": "$2a$10$HoVYyb4.rWWaAtWdIPUWI.wK8ybu439l6FQocf49/TJ2CZ6Ymq4L2"
+    "passwordEnc": "553d33a50293a593fdf3d850ed8f9971:f70ebf9ed3bbf4c144de1fccb01d1066e0942b0b58a755f5ed9ba959d2223baf"
   },
   {
     "id": 3,
     "username": "jroy",
     "name": "Jean Roy",
     "role": "employe",
-    "passwordHash": "$2a$10$wLr7tP01sBfVIgGu1uzwpuzedEgq88VPMoEoppzFsJyeWs1NQOCLu"
+    "passwordEnc": "17331a948976204aefc91c416a636e8b:e593aa6fc63c945119614115899faa908d75cf582d0dccb163a3692600d3c706"
   }
 ]

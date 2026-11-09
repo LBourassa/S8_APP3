@@ -1,9 +1,8 @@
 services:
   saqlicpo:
     build: .
+    image: saqlicpo:app3        # tag produit par `docker compose build` (sert à l'export)
     container_name: saqlicpo
     ports:
       - "3000:3000"
       - "2222:22"
-    environment:
-      - APP_KEY=saqlicpo-cle-interne-2026
