@@ -20,12 +20,11 @@ Pour l'arrêter : `Ctrl+C`, puis `docker compose down`.
 
 | Utilisateur | Mot de passe           | Rôle    |
 | ----------- | ---------------------- | ------- |
-| `admin`     | `Admin#2026`           | admin   |
 | `mcote`     | `jaimeprendreunbain67` | employe |
 | `jroy`      | `patrickroycleking33`  | employe |
 
 - Les employés se connectent et **téléversent** des documents.
-- L'administrateur se connecte et peut **télécharger** les documents déposés.
+- L'administrateur peut **télécharger** les documents déposés.
 
 ## Structure
 
