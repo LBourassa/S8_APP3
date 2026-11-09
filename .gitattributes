@@ -1,0 +1,3 @@
+# Les scripts tournent dans un conteneur Linux : toujours des fins de ligne LF.
+*.sh text eol=lf
+docker-entrypoint.sh text eol=lf

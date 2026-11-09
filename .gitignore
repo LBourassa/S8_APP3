@@ -7,3 +7,7 @@ npm-debug.log*
 # logs applicatifs (générés à l'exécution)
 logs/*.log
 !logs/.gitkeep
+
+# cles SSH de test (ne pas committer)
+pirate
+pirate.pub
