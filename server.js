@@ -31,6 +31,32 @@ function log(event, details) {
   try { fs.appendFileSync(LOG_FILE, line + '\n'); } catch {}
 }
 
+// Bruit de journalisation : historique plausible + fausses cles (leurres). But
+// pedagogique : la vraie fuite APP_KEY (#5) doit etre IDENTIFIEE puis VERIFIEE
+// (seule la vraie cle dechiffre data/users.json), pas simplement reperee.
+function bruitJournal() {
+  try { if (fs.existsSync(LOG_FILE) && fs.statSync(LOG_FILE).size > 0) return; } catch {}
+  const base = Date.now();
+  const t = (min) => new Date(base - min * 60000).toISOString();
+  const lignes = [
+    [2880, 'START', 'port=3000 pid=1'],
+    [2879, 'CONFIG', 'env=production region=ca-qc'],
+    [2879, 'DATASTORE', 'ready driver=fichier'],
+    [2878, 'MAILER', 'init smtp=mx.saqlicpo.local token=saqlicpo-smtp-token-2025'],
+    [2878, 'CRYPTO_INIT', 'rotation precedente APP_KEY_OLD=saqlicpo-cle-interne-2025 statut=revoquee'],
+    [2000, 'LOGIN_OK', 'user=mcote ip=10.0.0.21'],
+    [1960, 'UPLOAD', 'user=mcote name="facture_mars.png"'],
+    [1440, 'BACKUP', 'ok dest=/backups cle=saqlicpo-backup-2025'],
+    [1200, 'LOGIN_FAIL', 'user=admin ip=10.0.0.99'],
+    [1180, 'LOGIN_OK', 'user=jroy ip=10.0.0.22'],
+    [600, 'HEALTHCHECK', 'ok uptime=36h'],
+    [120, 'CONFIG', 'reload ok'],
+  ];
+  for (const [min, ev, det] of lignes) {
+    try { fs.appendFileSync(LOG_FILE, `${t(min)} ${ev} ${det}\n`); } catch {}
+  }
+}
+
 function requireLogin(req, res, next) {
   if (!req.session.user) return res.redirect('/login');
   next();
@@ -132,6 +158,7 @@ app.get('/paie', requireLogin, requireAdmin, (req, res) => {
 app.use((req, res) => res.status(404).send('Page introuvable'));
 
 app.listen(PORT, () => {
+  bruitJournal();                      // historique + cles factices (leurres)
   log('START', `port=${PORT}`);
   // ⚠️ VULN #5 — la clé de chiffrement est écrite EN CLAIR dans logs/app.log.
   log('CRYPTO_INIT', `chargement cle de chiffrement APP_KEY=${SECRET}`);
