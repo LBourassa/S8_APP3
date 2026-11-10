@@ -31,9 +31,6 @@ function log(event, details) {
   try { fs.appendFileSync(LOG_FILE, line + '\n'); } catch {}
 }
 
-// Bruit de journalisation : historique plausible + fausses cles (leurres). But
-// pedagogique : la vraie fuite APP_KEY (#5) doit etre IDENTIFIEE puis VERIFIEE
-// (seule la vraie cle dechiffre data/users.json), pas simplement reperee.
 function bruitJournal() {
   try { if (fs.existsSync(LOG_FILE) && fs.statSync(LOG_FILE).size > 0) return; } catch {}
   const base = Date.now();
