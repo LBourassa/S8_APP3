@@ -1,0 +1,6 @@
+{
+  "name": "labo-vuln4-5-simple",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": { "bcrypt": "^5.1.1" }
+}

@@ -1,0 +1,10 @@
+root
+saqadmin
+admin
+ubuntu
+www-data
+deploy
+test
+nexistepas42
+jdupont
+oracle

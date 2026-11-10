@@ -1,0 +1,24 @@
+services:
+  # --- Cible : serveur SSH vulnerable (OpenSSH 7.6p1) ---
+  ssh-lab:
+    build: .
+    container_name: ssh-enum-lab
+    # Publie aussi sur l'hote pour la reconnaissance (nmap/nc depuis ta machine).
+    ports:
+      - "127.0.0.1:2222:22"
+    restart: unless-stopped
+
+  # --- Attaquant : Metasploit pre-installe, sur le meme reseau que la cible ---
+  attacker:
+    image: metasploitframework/metasploit-framework:latest
+    container_name: ssh-enum-attacker
+    depends_on:
+      - ssh-lab
+    # Monte la liste d'utilisateurs et le script d'automatisation dans le conteneur.
+    volumes:
+      - ./liste_utilisateurs.txt:/data/liste_utilisateurs.txt:ro
+      - ./enum.rc:/data/enum.rc:ro
+    stdin_open: true
+    tty: true
+    # Garde le conteneur en vie pour pouvoir "exec" dedans a volonte.
+    entrypoint: ["tail", "-f", "/dev/null"]

